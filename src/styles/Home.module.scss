@@ -3,8 +3,6 @@ $primary-color: #e3350d;
 .container {
   min-height: 100vh;
   padding: 0 1.5rem;
-  display: flex;
-  justify-content: center;
 }
 
 .main {
@@ -30,10 +28,13 @@ $primary-color: #e3350d;
   ul {
     list-style: none;
     padding: 0;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   ul li {
     display: flex;
     margin: 2rem 0;
+    gap: 5rem;
   }
 }
