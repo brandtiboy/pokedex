@@ -4,6 +4,27 @@ import Pokemon from "../components/pokemon/";
 
 import styles from "../styles/Home.module.scss";
 
+const pokemonsAPI = "https://pokeapi.co/api/v2/pokemon?limit=151";
+const abilitiesAPI = "https://pokeapi.co/api/v2/ability/";
+
+export async function getStaticProps() {
+  const res = await fetch(pokemonsAPI);
+  const { results } = await res.json();
+
+  const pokemons = results.map((pokemon) => {
+    return {
+      id: pokemon.url,
+      name: pokemon.name,
+    };
+  });
+
+  return {
+    props: {
+      pokemons,
+    },
+  };
+}
+
 export default function Home({ pokemons }) {
   console.log("pokemon", pokemons);
 
@@ -33,24 +54,4 @@ export default function Home({ pokemons }) {
       </main>
     </div>
   );
-}
-
-export async function getStaticProps() {
-  const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
-  const { results } = await response.json();
-
-  console.log("json", results);
-
-  const pokemons = results.map((pokemon) => {
-    return {
-      id: pokemon.url,
-      name: pokemon.name,
-    };
-  });
-
-  return {
-    props: {
-      pokemons,
-    },
-  };
 }
